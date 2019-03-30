@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
 
-
   @override
   HomePageState createState() => HomePageState();
 }
