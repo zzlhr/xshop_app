@@ -5,6 +5,7 @@ import 'package:xshop_app/conf/theme.dart';
 import 'package:xshop_app/pages/Login.dart';
 import 'package:xshop_app/pages/Register.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:xshop_app/pages/UserInfo.dart';
 
 class MyPage extends StatefulWidget {
   MyPage({Key key, this.title}) : super(key: key);
@@ -26,17 +27,16 @@ class MyPageState extends State<MyPage> {
           IconButton(
             icon: Icon(Icons.settings),
             tooltip: '设置',
-            onPressed: (){},
+            onPressed: () {},
           ),
-
         ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _my(),
-          _order(),
-          _toolBox(),
+          _my(context),
+          _order(context),
+          _toolBox(context),
           RaisedButton(
             child: Text("登录"),
             onPressed: () {
@@ -61,7 +61,8 @@ class MyPageState extends State<MyPage> {
     );
   }
 }
-_toolBox(){
+
+_toolBox(context) {
   return Container(
     color: Colors.white,
     margin: EdgeInsets.only(top: 10),
@@ -74,7 +75,8 @@ _toolBox(){
               Icon(
                 MdiIcons.homeAccount,
               ),
-              "order"),
+              "order",
+              context),
         ),
         Expanded(
           child: _imgBtn(
@@ -82,7 +84,8 @@ _toolBox(){
               Icon(
                 Icons.collections,
               ),
-              "order"),
+              "order",
+              context),
         ),
         Expanded(
           child: _imgBtn(
@@ -90,7 +93,8 @@ _toolBox(){
               Icon(
                 MdiIcons.history,
               ),
-              "order"),
+              "order",
+              context),
         ),
         Expanded(
           child: _imgBtn(
@@ -98,13 +102,15 @@ _toolBox(){
               Icon(
                 MdiIcons.keyboardReturn,
               ),
-              "order"),
+              "order",
+              context),
         ),
       ],
     ),
   );
 }
-_order() {
+
+_order(context) {
   return Container(
     margin: EdgeInsets.only(top: 10),
     padding: EdgeInsets.all(8),
@@ -138,16 +144,17 @@ _order() {
                     Icon(
                       MdiIcons.paypal,
                     ),
-                    "order"),
+                    "order",
+                    context),
               ),
               Expanded(
-                child: _imgBtn("待发货", Icon(Icons.send), "order"),
+                child: _imgBtn("待发货", Icon(Icons.send), "order", context),
               ),
               Expanded(
-                child: _imgBtn("待收货", Icon(Icons.input), "order"),
+                child: _imgBtn("待收货", Icon(Icons.input), "order", context),
               ),
               Expanded(
-                child: _imgBtn("待评价", Icon(MdiIcons.flower), "order"),
+                child: _imgBtn("待评价", Icon(MdiIcons.flower), "order", context),
               ),
             ],
           ),
@@ -157,7 +164,7 @@ _order() {
   );
 }
 
-_imgBtn(String text, Icon icon, String routeName) {
+_imgBtn(String text, Icon icon, String routeName, context) {
   return Container(
     child: Column(
       children: <Widget>[icon, Text(text)],
@@ -165,7 +172,7 @@ _imgBtn(String text, Icon icon, String routeName) {
   );
 }
 
-_my() {
+_my(context) {
   return Container(
     padding: EdgeInsets.all(8),
     color: Colors.white,
@@ -195,8 +202,15 @@ _my() {
           ),
         ),
         Expanded(
+            child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new UserInfoPage()),
+            );
+          },
           child: Text("我的资料 >"),
-        )
+        ))
       ],
     ),
   );
