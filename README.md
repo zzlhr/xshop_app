@@ -19,3 +19,16 @@
 - 结算
 - 版本更新
 
+
+
+## 项目结构
+
+- Images 图片文件
+- lib dart代码
+  - component 公共组件
+  - conf 配置文件
+  - pages 页面
+  - main.dart 启动文件
+- ios 自动生成的ios文件
+- android 自动生成的Android文件
+- test 测试文件夹
