@@ -1,16 +1,21 @@
 # xshop_app
 
-XShop App
+##  功能
 
-## Getting Started
+- 我的页面
+  - 用户信息修改(手机号，用户名只能修改一次，性别，登录密码，头像)
+  - 收货地址 (省市区详细地址，收货人，收货人电话，标签)
+  - 收藏夹
+  - 最近浏览
+  - 我的订单
+  - 退款
+- 注册 (手机号，密码，验证码) 
+- 登录(手机号密码，登录手机号验证码登录) 
+- 首页
+- 购物车
+- 通知
+- 商品详情
+- 商品分类
+- 结算
+- 版本更新
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
