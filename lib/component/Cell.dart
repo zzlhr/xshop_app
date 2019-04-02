@@ -60,6 +60,9 @@ class Cell extends StatelessWidget {
       var _content = content ?? "";
       return Text(_content, textDirection: TextDirection.rtl);
     }
+    if (type == "AssetImage") {
+      return CircleAvatar(radius: 20, backgroundImage: content);
+    }
     return Container(width: 0, height: 0);
   }
 

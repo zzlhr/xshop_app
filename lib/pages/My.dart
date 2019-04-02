@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:xshop_app/component/XShopBottomNavigation.dart';
 import 'package:xshop_app/conf/theme.dart';
 import 'package:xshop_app/pages/Login.dart';
+import 'package:xshop_app/pages/OrderList.dart';
 import 'package:xshop_app/pages/Register.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:xshop_app/pages/UserInfo.dart';
@@ -127,9 +128,18 @@ _order(context) {
               ),
             ),
             Expanded(
-              child: Text(
-                "查看全部 >",
-                style: baseFont,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => OrderListPage()),
+                  );
+                },
+                child: Text(
+                  "查看全部 >",
+                  style: baseFont,
+                ),
               ),
             )
           ],
