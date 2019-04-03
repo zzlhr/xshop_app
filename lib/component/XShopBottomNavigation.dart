@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:xshop_app/conf/theme.dart';
-import 'package:xshop_app/main.dart';
 import 'package:xshop_app/pages/Classify.dart';
+import 'package:xshop_app/pages/Home.dart';
 import 'package:xshop_app/pages/My.dart';
 import 'package:xshop_app/pages/ShoppingCart.dart';
 
