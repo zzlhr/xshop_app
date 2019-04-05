@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xshop_app/conf/theme.dart';
 
 class Cell extends StatelessWidget {
   final title;
@@ -61,7 +60,14 @@ class Cell extends StatelessWidget {
       return Text(_content, textDirection: TextDirection.rtl);
     }
     if (type == "AssetImage") {
-      return CircleAvatar(radius: 20, backgroundImage: content);
+      return Container(
+        alignment: Alignment.centerRight,
+        child: SizedBox(
+          height: 40,
+          width: 40,
+          child: CircleAvatar(radius: 20, backgroundImage: content),
+        ),
+      );
     }
     return Container(width: 0, height: 0);
   }

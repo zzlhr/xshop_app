@@ -101,20 +101,25 @@ class OrderListPageState extends State<OrderListPage>
   _goodsItem() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Image.asset(
-              "images/d1.jpg",
-              height: 100,
+      child: GestureDetector(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Image.asset(
+                "images/d1.jpg",
+                height: 100,
+              ),
+              flex: 1,
             ),
-            flex: 1,
-          ),
-          Expanded(
-            child: _orderTitle(),
-            flex: 3,
-          ),
-        ],
+            Expanded(
+              child: _orderTitle(),
+              flex: 3,
+            ),
+          ],
+        ),
+        onTap: (){
+
+        },
       ),
     );
   }

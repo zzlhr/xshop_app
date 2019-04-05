@@ -20,7 +20,12 @@ class UserInfoPageState extends State<UserInfoPage> {
       ),
       body: Column(
         children: <Widget>[
-          Cell("头像", isJump: false, content: AssetImage("images/head.jpeg"), type: "AssetImage",),
+          Cell(
+            "头像",
+            isJump: false,
+            content: AssetImage("images/head.jpeg"),
+            type: "AssetImage",
+          ),
           Cell(
             "昵称",
             isJump: false,
