@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xshop_app/component/XShopBottomNavigation.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:xshop_app/pages/GoodsInfo.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -31,7 +32,11 @@ class HomePageState extends State<HomePage> {
         onRefresh: _refresh,
         backgroundColor: Colors.blue,
         child: ListView(
-          children: <Widget>[_swipe(context), _quickEntryList(), _goodsList()],
+          children: <Widget>[
+            _swipe(context),
+            _quickEntryList(),
+            _goodsList(context)
+          ],
         ),
       ),
       bottomNavigationBar: getBottomNavigation(0, context),
@@ -97,16 +102,15 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  _goodsList() {
+  _goodsList(context) {
     return GridView.count(
       children: <Widget>[
-        _goodsItem(),
-        _goodsItem(),
-        _goodsItem(),
-        _goodsItem(),
-        _goodsItem(),
-        _goodsItem(),
-
+        _goodsItem(context),
+        _goodsItem(context),
+        _goodsItem(context),
+        _goodsItem(context),
+        _goodsItem(context),
+        _goodsItem(context),
       ],
       primary: false,
       padding: const EdgeInsets.all(10.0),
@@ -117,32 +121,42 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  _goodsItem() {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            child: Image.asset("images/d1.jpg"),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-            child: Text(
-              "美美的连衣裙的连衣裙的连衣裙的连衣裙的连衣裙",
-              maxLines: 2,
+  _goodsItem(context) {
+    return GestureDetector(
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              child: Image.asset("images/d1.jpg"),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: Text(
-              "￥ 1700.00",
-              textAlign: TextAlign.start,
-              style: TextStyle(color: Colors.red),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+              child: Text(
+                "美美的连衣裙的连衣裙的连衣裙的连衣裙的连衣裙",
+                maxLines: 2,
+              ),
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+              child: Text(
+                "￥ 1700.00",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.red),
+              ),
+            )
+          ],
+        ),
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          new MaterialPageRoute(
+              builder: (context) =>
+                  new GoodsInfoPage(title: "美美的连衣裙的连衣裙的连衣裙的连衣裙的连衣裙")),
+        );
+      },
     );
   }
 
