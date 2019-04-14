@@ -1,7 +1,6 @@
 # xshop_app
 ![img](https://ws2.sinaimg.cn/large/006tNc79ly1g229v6vzshg30a90kl7wi.gif)
 ##  功能
-
 - 我的页面
   - 用户信息修改(手机号，用户名只能修改一次，性别，登录密码，头像)
   - 收货地址 (省市区详细地址，收货人，收货人电话，标签)

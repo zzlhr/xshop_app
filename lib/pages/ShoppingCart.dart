@@ -165,16 +165,36 @@ class ShoppingCartPageState extends State<ShoppingCartPage> {
     }
 
     _cartBottom() {
-      return Stack(
-        children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Row(
-              children: <Widget>[Text("合计:"), Text("￥0.00")],
-            ),
-          )
-        ],
+      return Align(
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "合计:￥0.00",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(fontSize: 20, color: Colors.red),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: RaisedButton(
+                  color: Colors.deepOrange,
+                  onPressed: () {},
+                  child: Text(
+                    "结算",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       );
     } // 购物车底部结算
 
@@ -182,19 +202,25 @@ class ShoppingCartPageState extends State<ShoppingCartPage> {
       appBar: AppBar(
         title: Text("购物车"),
       ),
-      body: ListView(
+      body: Stack(
         children: <Widget>[
-          Card(
-            child: Column(
-              children: <Widget>[
-                _cartTitle(),
-                Column(
-                  children: _cartData.map((item) => _cartItem(item)).toList(),
+          ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              Card(
+                child: Column(
+                  children: <Widget>[
+                    _cartTitle(),
+                    Column(
+                      children:
+                          _cartData.map((item) => _cartItem(item)).toList(),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-//          _cartBottom()
+          _cartBottom()
         ],
       ),
       bottomNavigationBar: getBottomNavigation(2, context),

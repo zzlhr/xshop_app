@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xshop_app/component/XShopBottomNavigation.dart';
+import 'package:xshop_app/pages/ClassifyGoods.dart';
 
 class ClassifyPage extends StatefulWidget {
   ClassifyPage({Key key}) : super(key: key);
@@ -99,32 +100,40 @@ class ClassifyPagePageState extends State<ClassifyPage> {
     }
 
     List<Map> classifyItemChildren = classifyItem['children'];
-    List<Widget> _content = classifyItemChildren.map(
-      (i) =>
-      GestureDetector(
-        child: Container(
-          margin: EdgeInsets.only(bottom: 10),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 5,
-                child: Image.asset(
-                  i['image'],
-                  fit: BoxFit.fitHeight,
+    List<Widget> _content = classifyItemChildren
+        .map(
+          (i) => GestureDetector(
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child: Image.asset(
+                          i['image'],
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(i['name']),
+                      )
+                    ],
+                  ),
                 ),
+                onTap: () {
+                  // TODO: jump to classify list page
+                  var classifyId = i['id'];
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new ClassifyGoodsPage(
+                              classifyId: classifyId,
+                            )),
+                  );
+                },
               ),
-              Expanded(
-                child: Text(i['name']),
-              )
-            ],
-          ),
-        ),
-        onTap: () {
-          // TODO: jump to goods list page
-          var goodsId = i['id'];
-        },
-      ),
-    ).toList();
+        )
+        .toList();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -155,10 +164,7 @@ class ClassifyPagePageState extends State<ClassifyPage> {
       Widget w = GestureDetector(
         child: Container(
           alignment: Alignment.center,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width / 5,
+          width: MediaQuery.of(context).size.width / 5,
           color: color,
           padding: EdgeInsets.fromLTRB(8, 10, 8, 10),
           child: Text(
@@ -183,10 +189,7 @@ class ClassifyPagePageState extends State<ClassifyPage> {
           Expanded(
             child: Container(
               color: Colors.white,
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
+              height: MediaQuery.of(context).size.height,
               child: Column(
                 children: classifyWidget,
               ),
