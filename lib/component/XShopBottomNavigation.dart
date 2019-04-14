@@ -15,15 +15,15 @@ getBottomNavigation(_goIndex, context) {
           backgroundColor: themeColor,
           title: Text('首页')),
       BottomNavigationBarItem(
-          icon: Icon(Icons.business),
+          icon: Icon(Icons.class_),
           backgroundColor: themeColor,
           title: Text('分类')),
       BottomNavigationBarItem(
-          icon: Icon(Icons.school),
+          icon: Icon(Icons.shopping_cart),
           backgroundColor: themeColor,
           title: Text('购物车')),
       BottomNavigationBarItem(
-          icon: Icon(Icons.school),
+          icon: Icon(Icons.perm_identity),
           backgroundColor: themeColor,
           title: Text('我的')),
     ],
