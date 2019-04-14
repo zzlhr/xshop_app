@@ -94,7 +94,10 @@ class HomePageState extends State<HomePage> {
             height: 40,
             width: 40,
             child: CircleAvatar(
-                radius: 20, backgroundImage: AssetImage("images/head.jpeg")),
+              radius: 20,
+              backgroundImage: AssetImage("images/home_t.png"),
+              backgroundColor: Colors.red,
+            ),
           ),
           Text("领券")
         ],

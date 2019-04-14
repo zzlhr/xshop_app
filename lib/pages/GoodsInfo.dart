@@ -37,9 +37,9 @@ class GoodsInfoPageState extends State<GoodsInfoPage> {
       height: 400,
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return new Image.network(
-            "http://via.placeholder.com/350x150",
-            fit: BoxFit.fill,
+          return new Image.asset(
+            "images/goods_img_cover.webp",
+//            fit: BoxFit.fill,
           );
         },
         autoplay: true,
@@ -58,21 +58,40 @@ class GoodsInfoPageState extends State<GoodsInfoPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _priceRow(),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                "美美的连衣裙的连衣裙的连衣裙的连衣裙的连衣裙",
-                maxLines: 2,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-            ),
+            _goodsTitle(),
             _goodsSelected(context),
+            _goodsDescribe(),
           ],
         ),
       ),
     );
   }
-
+  _goodsDescribe(){
+    return Padding(
+      padding: const EdgeInsets.only(top:8.0),
+      child: Column(
+        children: <Widget>[
+          Image.asset("images/goods_img7.webp"),
+          Image.asset("images/goods_img1.webp"),
+          Image.asset("images/goods_img5.webp"),
+          Image.asset("images/goods_img2.webp"),
+          Image.asset("images/goods_img4.webp"),
+          Image.asset("images/goods_img3.webp"),
+          Image.asset("images/goods_img6.webp"),
+        ],
+      ),
+    );
+  }
+  _goodsTitle(){
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Text(
+        "美美的连衣裙的连衣裙的连衣裙的连衣裙的连衣裙",
+        maxLines: 2,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      ),
+    );
+  }
   _priceRow() {
     return Container(
       child: Row(

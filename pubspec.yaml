@@ -45,6 +45,15 @@ flutter:
   assets:
     - images/head.jpeg
     - images/d1.jpg
+    - images/goods_img1.webp
+    - images/goods_img2.webp
+    - images/goods_img3.webp
+    - images/goods_img4.webp
+    - images/goods_img5.webp
+    - images/goods_img6.webp
+    - images/goods_img7.webp
+    - images/goods_img_cover.webp
+    - images/home_t.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
