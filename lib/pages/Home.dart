@@ -40,11 +40,6 @@ class HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: getBottomNavigation(0, context),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
     );
   }
 

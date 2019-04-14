@@ -12,6 +12,8 @@ class Cell extends StatelessWidget {
 
   final type;
 
+  final isTop;
+
   const Cell(
     this.title, {
     Key key,
@@ -19,6 +21,7 @@ class Cell extends StatelessWidget {
     this.isJump,
     this.jumpPageName,
     this.type,
+    this.isTop,
   })  : assert(title != null),
         super(key: key);
 
@@ -26,13 +29,16 @@ class Cell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        Divider(
+          height: isTop ?? false ? 1 : 0,
+        ),
         Container(
           color: Colors.white,
           padding: EdgeInsets.fromLTRB(8, 12, 8, 12),
           child: Row(
             children: <Widget>[
               Expanded(
-                flex: 5,
+                flex: 10,
                 child: Text(
                   this.title,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
@@ -73,7 +79,7 @@ class Cell extends StatelessWidget {
   }
 
   _jump() {
-    if (this.isJump) {
+    if (this.isJump ?? false) {
       return Expanded(
         flex: 1,
         child: Icon(
