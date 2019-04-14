@@ -33,7 +33,7 @@ class SettingPageState extends State<SettingPage> {
             padding: EdgeInsets.only(top: 10.0),
             child: Column(
               children: <Widget>[
-                Cell("清楚缓存", isJump: true, isTop: true,),
+                Cell("清除缓存", isJump: true, isTop: true,),
                 Cell("github地址", isJump: true),
               ],
             ),
