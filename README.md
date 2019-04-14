@@ -1,5 +1,5 @@
 # xshop_app
-
+![img](https://ws2.sinaimg.cn/large/006tNc79ly1g229v6vzshg30a90kl7wi.gif)
 ##  功能
 
 - 我的页面
