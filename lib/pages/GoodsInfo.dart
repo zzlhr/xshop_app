@@ -13,6 +13,8 @@ class GoodsInfoPage extends StatefulWidget {
 }
 
 class GoodsInfoPageState extends State<GoodsInfoPage> {
+  GlobalKey _keyRed = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -21,7 +23,10 @@ class GoodsInfoPageState extends State<GoodsInfoPage> {
         title: Text(widget.title),
       ),
       body: ListView(
-        children: <Widget>[_swipe(context), _goodsInfo()],
+        children: <Widget>[
+          _swipe(context),
+          _goodsInfo(context),
+        ],
       ),
     );
   }
@@ -45,7 +50,7 @@ class GoodsInfoPageState extends State<GoodsInfoPage> {
     );
   }
 
-  _goodsInfo() {
+  _goodsInfo(context) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -61,7 +66,7 @@ class GoodsInfoPageState extends State<GoodsInfoPage> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ),
-            _goodsSelected(),
+            _goodsSelected(context),
           ],
         ),
       ),
@@ -106,38 +111,163 @@ class GoodsInfoPageState extends State<GoodsInfoPage> {
     );
   }
 
-  _goodsSelected() {
+  _goodsSelected(context) {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
+      child: GestureDetector(
+        child: Column(
+          children: <Widget>[
+            Divider(
+              height: 1,
+            ),
+            Container(
+              height: 30,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      "已选",
+                      style: TextStyle(color: Colors.black45),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text("请选择 颜色分类"),
+                    flex: 7,
+                  ),
+                  Expanded(
+                    child: Container(child: Icon(Icons.chevron_right)),
+                  )
+                ],
+              ),
+            ),
+            Divider(
+              height: 1,
+            )
+          ],
+        ),
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return _bottomSheetContainer();
+              });
+        },
+      ),
+    );
+  }
+
+  _bottomSheetContainer() {
+    return Container(
+      height: 600,
+      margin: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
-          Divider(
-            height: 1,
+          Expanded(
+            flex: 3,
+            child: _bottomSheetSelected(),
           ),
-          Container(
-            height: 30,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+          Expanded(
+            flex: 8,
+            child: _bottomSheetClass(),
+          ),
+          Expanded(
+            child: _bottomSheetBottom(),
+          )
+        ],
+      ),
+    );
+  }
+
+  _bottomSheetSelected() {
+    return Row(
+      children: <Widget>[
+        Image.asset(
+          "images/d1.jpg",
+          width: 100,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: 100,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Expanded(
-                  child: Text(
-                    "已选",
-                    style: TextStyle(color: Colors.black45),
-                  ),
-                ),
-                Expanded(
-                  child: Text("请选择 颜色分类"),
-                  flex: 7,
-                ),
-                Expanded(
-                  child: Container(child: Icon(Icons.chevron_right)),
-                )
+                Text("￥18.8", style: TextStyle(color: Colors.red)),
+                Text("库存216件"),
+                Text("已选 \"仙女裙\"")
               ],
             ),
           ),
-          Divider(
-            height: 1,
-          )
+        )
+      ],
+    );
+  }
+
+  _bottomSheetBottom() {
+    return Container(
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                color: Colors.amber,
+                child: Center(
+                  child: Text(
+                    "加入购物车",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.deepOrange,
+                child: Center(
+                    child: Text("立即购买",
+                        style: TextStyle(fontSize: 20, color: Colors.white))),
+              ),
+            )
+          ],
+        ));
+  }
+
+  _bottomSheetClass() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("颜色分类:"),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: OutlineButton(
+                    child: Text("黑色点点"),
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0))),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: OutlineButton(
+                    child: Text("蓝色点点"),
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0))),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: OutlineButton(
+                    child: Text("紫色点点"),
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0))),
+              )
+            ],
+          ),
         ],
       ),
     );
