@@ -63,6 +63,8 @@ flutter:
     - images/class_img7.webp
     - images/class_img8.webp
     - images/class_img9.webp
+    - images/cart_img1.webp
+    - images/cart_img2.webp
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
