@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SettleAccountsPage extends StatefulWidget {
-  SettleAccountsPage({Key key, this.title}) : super(key: key);
+class AddressPage extends StatefulWidget {
+  AddressPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  SettleAccountsPageState createState() => SettleAccountsPageState();
+  AddressPageState createState() => AddressPageState();
 }
 
-class SettleAccountsPageState extends State<SettleAccountsPage> {
+class AddressPageState extends State<AddressPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("注册"),
+        title: Text("收货地址"),
       ),
       body: Column(
         children: <Widget>[

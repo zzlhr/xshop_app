@@ -171,10 +171,7 @@ class ShoppingCartPageState extends State<ShoppingCartPage> {
             bottom: 0,
             left: 0,
             child: Row(
-              children: <Widget>[
-                Text("合计:"),
-                Text("￥0.00")
-              ],
+              children: <Widget>[Text("合计:"), Text("￥0.00")],
             ),
           )
         ],
@@ -197,9 +194,8 @@ class ShoppingCartPageState extends State<ShoppingCartPage> {
               ],
             ),
           ),
-          _cartBottom()
+//          _cartBottom()
         ],
-
       ),
       bottomNavigationBar: getBottomNavigation(2, context),
     );

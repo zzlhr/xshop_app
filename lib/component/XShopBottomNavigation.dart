@@ -13,7 +13,8 @@ getBottomNavigation(_goIndex, context) {
       BottomNavigationBarItem(
           icon: Icon(Icons.home),
           backgroundColor: themeColor,
-          title: Text('首页')),
+          title: Text('首页'),
+      ),
       BottomNavigationBarItem(
           icon: Icon(Icons.class_),
           backgroundColor: themeColor,
@@ -29,7 +30,7 @@ getBottomNavigation(_goIndex, context) {
     ],
     type: BottomNavigationBarType.fixed,
     currentIndex: _goIndex,
-    fixedColor: Colors.deepPurple,
+    fixedColor: themeColor,
     onTap: (index) {
       _onItemTapped(index, context);
     },

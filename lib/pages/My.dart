@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xshop_app/component/XShopBottomNavigation.dart';
 import 'package:xshop_app/conf/theme.dart';
+import 'package:xshop_app/pages/Address.dart';
 import 'package:xshop_app/pages/Login.dart';
 import 'package:xshop_app/pages/OrderList.dart';
 import 'package:xshop_app/pages/Register.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:xshop_app/pages/Setting.dart';
 import 'package:xshop_app/pages/UserInfo.dart';
 
 class MyPage extends StatefulWidget {
@@ -28,7 +30,12 @@ class MyPageState extends State<MyPage> {
           IconButton(
             icon: Icon(Icons.settings),
             tooltip: '设置',
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new SettingPage()),
+              );
+            },
           ),
         ],
       ),
@@ -71,13 +78,21 @@ _toolBox(context) {
     child: Row(
       children: <Widget>[
         Expanded(
-          child: _imgBtn(
-              "收货地址",
-              Icon(
-                MdiIcons.homeAccount,
-              ),
-              "order",
-              context),
+          child: GestureDetector(
+            child: _imgBtn(
+                "收货地址",
+                Icon(
+                  MdiIcons.homeAccount,
+                ),
+                "order",
+                context),
+            onTap: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new AddressPage()),
+              );
+            },
+          ),
         ),
         Expanded(
           child: _imgBtn(
