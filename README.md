@@ -1,5 +1,5 @@
 # xshop_app
-######  一款简洁flutter商场app
+######  一款简洁flutter商城app
 
 
 
