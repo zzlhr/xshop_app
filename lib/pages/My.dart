@@ -164,22 +164,42 @@ _order(context) {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: _imgBtn(
-                    "待付款",
-                    Icon(
-                      MdiIcons.paypal,
-                    ),
-                    "order",
-                    context),
+                child: GestureDetector(
+                  child:
+                      _imgBtn("待付款", Icon(MdiIcons.paypal), "order", context),
+                  onTap: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (context) => new OrderListPage(type: 1)));
+                  },
+                ),
               ),
               Expanded(
-                child: _imgBtn("待发货", Icon(Icons.send), "order", context),
+                child: GestureDetector(
+                  child: _imgBtn("待发货", Icon(Icons.send), "order", context),
+                  onTap: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (context) => new OrderListPage(type: 2)));
+                  },
+                ),
               ),
               Expanded(
-                child: _imgBtn("待收货", Icon(Icons.input), "order", context),
+                child: GestureDetector(
+                  child: _imgBtn("待收货", Icon(Icons.input), "order", context),
+                  onTap: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (context) => new OrderListPage(type: 3)));
+                  },
+                ),
               ),
               Expanded(
-                child: _imgBtn("待评价", Icon(MdiIcons.flower), "order", context),
+                child: GestureDetector(
+                  child:
+                      _imgBtn("待评价", Icon(MdiIcons.flower), "order", context),
+                  onTap: () {
+                    Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (context) => new OrderListPage(type: 4)));
+                  },
+                ),
               ),
             ],
           ),

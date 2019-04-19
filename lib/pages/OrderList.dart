@@ -25,7 +25,8 @@ class OrderListPageState extends State<OrderListPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: tabs.length);
+    _tabController = TabController(
+        vsync: this, length: tabs.length, initialIndex: widget.type);
   }
 
   @override
@@ -38,16 +39,16 @@ class OrderListPageState extends State<OrderListPage>
   Widget build(BuildContext context) {
     return new DefaultTabController(
         length: tabs.length,
-        child: new Scaffold(
-          appBar: new AppBar(
+        child: Scaffold(
+          appBar: AppBar(
             title: Text("我的订单"),
-            bottom: new TabBar(
+            bottom: TabBar(
               tabs: tabs,
               isScrollable: true,
               controller: _tabController,
             ),
           ),
-          body: new TabBarView(
+          body: TabBarView(
             children: [
               RefreshIndicator(
                 onRefresh: () {},
@@ -117,9 +118,7 @@ class OrderListPageState extends State<OrderListPage>
             ),
           ],
         ),
-        onTap: (){
-
-        },
+        onTap: () {},
       ),
     );
   }
