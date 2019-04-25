@@ -127,7 +127,8 @@ class HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              child: Image.asset("images/d1.jpg"),
+              alignment: Alignment.center,
+              child: Image.asset("images/d1.jpg",height: 150,),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),

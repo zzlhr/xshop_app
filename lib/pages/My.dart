@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xshop_app/component/XShopBottomNavigation.dart';
 import 'package:xshop_app/conf/theme.dart';
 import 'package:xshop_app/pages/Address.dart';
@@ -9,6 +12,7 @@ import 'package:xshop_app/pages/Register.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:xshop_app/pages/Setting.dart';
 import 'package:xshop_app/pages/UserInfo.dart';
+import 'package:xshop_app/util/user_util.dart';
 
 class MyPage extends StatefulWidget {
   MyPage({Key key, this.title}) : super(key: key);
@@ -20,9 +24,13 @@ class MyPage extends StatefulWidget {
 }
 
 class MyPageState extends State<MyPage> {
-  @override
+
+  Future<Map<String, dynamic>> _getUser() {
+    Future<Map<String, dynamic>> future = getUser();
+    return future;
+  }
+
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text("我的"),
@@ -39,37 +47,82 @@ class MyPageState extends State<MyPage> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _my(context),
-          _order(context),
-          _toolBox(context),
-          RaisedButton(
-            child: Text("登录"),
-            onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new LoginPage()),
-              );
-            },
-          ),
-          RaisedButton(
-            child: Text("注册"),
-            onPressed: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(builder: (context) => new RegisterPage()),
-              );
-            },
-          )
-        ],
+      body: FutureBuilder<Map<String, dynamic>>(
+        future: _getUser(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) =>
+            _buildFuture(context, snapshot),
       ),
       bottomNavigationBar: getBottomNavigation(3, context),
     );
   }
+
+  _buildFuture(BuildContext context, AsyncSnapshot snapshot) {
+    switch (snapshot.connectionState) {
+      case ConnectionState.none:
+        return Text('还没有开始网络请求');
+      case ConnectionState.active:
+        return Text('ConnectionState.active');
+      case ConnectionState.waiting:
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      case ConnectionState.done:
+        print("data:${snapshot.data}");
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+        if (snapshot.data == {}) {
+          print("context:$context");
+          Navigator.push(
+            context,
+            new MaterialPageRoute(builder: (context) => new LoginPage()),
+          );
+          Fluttertoast.showToast(
+              msg: "请先登录",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIos: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+        return _build(context, snapshot);
+    }
+    return null;
+  }
 }
 
+/// main
+_build(context, snapshot) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      _my(context, snapshot),
+      _order(context),
+      _toolBox(context),
+      RaisedButton(
+        child: Text("登录"),
+        onPressed: () {
+          Navigator.push(
+            context,
+            new MaterialPageRoute(builder: (context) => new LoginPage()),
+          );
+        },
+      ),
+      RaisedButton(
+        child: Text("注册"),
+        onPressed: () {
+          Navigator.push(
+            context,
+            new MaterialPageRoute(builder: (context) => new RegisterPage()),
+          );
+        },
+      )
+    ],
+  );
+}
+
+///  components
 _toolBox(context) {
   return Container(
     color: Colors.white,
@@ -217,7 +270,8 @@ _imgBtn(String text, Icon icon, String routeName, context) {
   );
 }
 
-_my(context) {
+_my(context, snapshot) {
+  var user = snapshot.data;
   return Container(
     padding: EdgeInsets.all(8),
     color: Colors.white,
@@ -235,11 +289,11 @@ _my(context) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "zzlhr",
+                  user['username'],
                   style: h1,
                 ),
                 Text(
-                  "18888888888",
+                  user['phone'],
                   style: TextStyle(color: Colors.black45),
                 )
               ],
