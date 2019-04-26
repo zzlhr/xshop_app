@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xshop_app/pages/GoodsInfo.dart';
+import 'package:xshop_app/pages/goods_info.dart';
 
 class ClassifyGoodsPage extends StatefulWidget {
   ClassifyGoodsPage({Key key, this.classifyId}) : super(key: key);

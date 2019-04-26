@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:xshop_app/component/x_router.dart';
 import 'package:xshop_app/conf/theme.dart';
-import 'package:xshop_app/pages/Classify.dart';
-import 'package:xshop_app/pages/Home.dart';
-import 'package:xshop_app/pages/My.dart';
-import 'package:xshop_app/pages/ShoppingCart.dart';
+import 'package:xshop_app/pages/classify.dart';
+import 'package:xshop_app/pages/home.dart';
+import 'package:xshop_app/pages/my.dart';
+import 'package:xshop_app/pages/shopping_cart.dart';
 
 var _nowIndex = 0;
 
@@ -40,7 +41,7 @@ getBottomNavigation(_goIndex, context) {
 _onItemTapped(index, context) {
   if (_nowIndex != index) {
     Navigator.of(context).pushAndRemoveUntil(
-        new Route(builder: (context) => _jump(index)),
+        new XRoute(builder: (context) => _jump(index)),
         (route) => route == null);
     _nowIndex = index;
   }
@@ -59,48 +60,4 @@ _jump(index) {
   }
 }
 
-class Route extends PageRoute {
-  Route({
-    @required this.builder,
-    this.transitionDuration = const Duration(milliseconds: 0),
-    this.opaque = true,
-    this.barrierDismissible = false,
-    this.barrierColor,
-    this.barrierLabel,
-    this.maintainState = true,
-  });
 
-  final WidgetBuilder builder;
-
-  @override
-  final Duration transitionDuration;
-
-  @override
-  final bool opaque;
-
-  @override
-  final bool barrierDismissible;
-
-  @override
-  final Color barrierColor;
-
-  @override
-  final String barrierLabel;
-
-  @override
-  final bool maintainState;
-
-  @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation) =>
-      builder(context);
-
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    return FadeTransition(
-      opacity: animation,
-      child: builder(context),
-    );
-  }
-}

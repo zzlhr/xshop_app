@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xshop_app/pages/EditAddress.dart';
+import 'package:xshop_app/pages/edit_address.dart';
 
 class AddressPage extends StatefulWidget {
   AddressPage({Key key, this.title}) : super(key: key);

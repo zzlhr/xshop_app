@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xshop_app/component/XShopBottomNavigation.dart';
-import 'package:xshop_app/pages/ClassifyGoods.dart';
+import 'package:xshop_app/component/x_shop_bottom_navigation.dart';
+import 'package:xshop_app/pages/classify_goods.dart';
 
 class ClassifyPage extends StatefulWidget {
   ClassifyPage({Key key}) : super(key: key);

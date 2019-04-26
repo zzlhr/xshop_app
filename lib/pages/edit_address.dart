@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pickers/city_pickers.dart';
-import 'package:xshop_app/component/Cell.dart';
+import 'package:xshop_app/component/cell.dart';
 
 class EditAddressPage extends StatefulWidget {
   EditAddressPage({Key key, this.addressId}) : super(key: key);

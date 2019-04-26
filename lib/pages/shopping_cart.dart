@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xshop_app/component/XShopBottomNavigation.dart';
+import 'package:xshop_app/component/x_shop_bottom_navigation.dart';
 import 'package:xshop_app/conf/theme.dart';
 
 class ShoppingCartPage extends StatefulWidget {

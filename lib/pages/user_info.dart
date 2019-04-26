@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xshop_app/component/Cell.dart';
+import 'package:xshop_app/component/cell.dart';
 
 class UserInfoPage extends StatefulWidget {
   UserInfoPage({Key key, this.title}) : super(key: key);

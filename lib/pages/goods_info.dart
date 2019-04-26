@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:xshop_app/component/Cell.dart';
+import 'package:xshop_app/component/cell.dart';
 
 class GoodsInfoPage extends StatefulWidget {
   GoodsInfoPage({Key key, this.title, this.goodsId}) : super(key: key);
