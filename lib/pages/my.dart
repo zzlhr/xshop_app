@@ -37,11 +37,7 @@ class MyPageState extends State<MyPage> {
     _getUser().then((userMap) {
       if (userMap.toString() == "{}") {
         print("context:$context");
-        // 未登录跳转登录
-        Navigator.push(
-          context,
-          new MaterialPageRoute(builder: (context) => new LoginPage()),
-        );
+        // 未登录提示登录
         Fluttertoast.showToast(
             msg: "请先登录",
             toastLength: Toast.LENGTH_LONG,
@@ -98,6 +94,19 @@ class MyPageState extends State<MyPage> {
                 new MaterialPageRoute(builder: (context) => new LoginPage()),
               );
             },
+          ),
+          RaisedButton(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[Text("去注册")],
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new RegisterPage()),
+              );
+            },
           )
         ],
       ),
@@ -112,24 +121,6 @@ class MyPageState extends State<MyPage> {
         _my(context),
         _order(context),
         _toolBox(context),
-        RaisedButton(
-          child: Text("登录"),
-          onPressed: () {
-            Navigator.push(
-              context,
-              new MaterialPageRoute(builder: (context) => new LoginPage()),
-            );
-          },
-        ),
-        RaisedButton(
-          child: Text("注册"),
-          onPressed: () {
-            Navigator.push(
-              context,
-              new MaterialPageRoute(builder: (context) => new RegisterPage()),
-            );
-          },
-        )
       ],
     );
   }

@@ -14,18 +14,9 @@ String userLoginApi = userModelUri + "/login";
 Dio dio = new Dio();
 
 // send http
-Future<Response> userLogin(String phone, String password) {
-  return SharedPreferences.getInstance().then((prefs) {
-     dio.post(userLoginApi,
-            data: {"phone": phone, "password": password},
-            options: Options(
-                contentType:
-                    ContentType.parse("application/x-www-form-urlencoded")))
-        .then((response) {
-      if (response.data['code'] == 0 && response.data['data']['token'] != "") {
-        prefs.setString("token", response.data['data']['token']);
-        prefs.setString("user", json.encode(response.data['data']));
-      }
-    });
-  });
+Future userLogin(String phone, String password) async {
+  return dio.post(userLoginApi,
+      data: {"phone": phone, "password": password},
+      options: Options(
+          contentType: ContentType.parse("application/x-www-form-urlencoded")));
 }
