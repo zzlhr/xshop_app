@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:xshop_app/api/api.dart';
 import 'package:xshop_app/component/cell.dart';
 import 'package:xshop_app/component/toast.dart';
+import 'package:xshop_app/pages/edit_password.dart';
 
 class UserInfoPage extends StatefulWidget {
   UserInfoPage({Key key, this.title}) : super(key: key);
@@ -56,10 +57,16 @@ class UserInfoPageState extends State<UserInfoPage> {
           isJump: false,
           content: "${userMap['phone']}",
         ),
-        Cell(
-          "修改密码",
-          isJump: true,
-          content: "",
+        GestureDetector(
+          child: Cell(
+            "修改密码",
+            isJump: true,
+            content: "",
+          ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => EditPasswordPage()));
+          },
         )
       ],
     );
