@@ -11,8 +11,8 @@ String baseUrl = "http://192.168.31.8:8008";
 String userModelUri = baseUrl + "/user/";
 
 // api List
-String userLoginApi = userModelUri + "/login";
-String userInfoApi = userModelUri + "/getUser";
+String userLoginApi = userModelUri + "login";
+String userInfoApi = userModelUri + "getUser";
 
 Options publicOptions = Options(
     contentType: ContentType.parse("application/x-www-form-urlencoded"));
@@ -46,9 +46,9 @@ Future<Map<String, dynamic>> userInfo() async {
     throw new Exception("未登录");
   }
   int uid = userMap['uid'];
-  print(uid);
-  Response response = await dio.post(userInfoApi,
-      data: {'token': getToken(), 'uid': uid}, options: publicOptions);
+  var postData = {'token': await getToken(), 'uid': uid};
+  Response response =
+      await dio.post(userInfoApi, data: postData, options: publicOptions);
   if (response.data['code'] != 0) {
     Toast.show(response.data['msg']);
   }

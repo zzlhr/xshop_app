@@ -44,8 +44,6 @@ class MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("loading: $loading");
-    print("userMap:$userMap");
     return Scaffold(
       appBar: AppBar(
         title: Text("我的"),
@@ -195,7 +193,9 @@ class MyPageState extends State<MyPage> {
                     Navigator.push(
                       context,
                       new MaterialPageRoute(
-                          builder: (context) => OrderListPage(type: 0,)),
+                          builder: (context) => OrderListPage(
+                                type: 0,
+                              )),
                     );
                   },
                   child: Text(

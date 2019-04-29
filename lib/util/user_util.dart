@@ -18,7 +18,7 @@ Future<Map<String, dynamic>> getUser() async {
   }
 }
 
-getToken() async {
+Future<String> getToken() async {
   Map<String, dynamic> userMap = await getUser();
   print("userMap:$userMap");
   return userMap['token'];
