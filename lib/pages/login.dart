@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_app/api/api.dart';
+import 'package:xshop_app/component/toast.dart';
 import 'package:xshop_app/conf/theme.dart';
 import 'package:xshop_app/component/x_router.dart';
 import 'package:xshop_app/pages/my.dart';
@@ -85,17 +86,7 @@ class LoginPageState extends State<LoginPage> {
             child: RaisedButton(
               color: themeColor,
               onPressed: () {
-                userLogin(_phone, _password).then((resp) async {
-                  print("resp:$resp");
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  prefs.setString("token", resp.data['data']['token']);
-                  prefs.setString("user", json.encode(resp.data['data']));
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      new XRoute(builder: (context) => MyPage()),
-                      (router) => router == null);
-                });
+                _loginDo();
               },
               child: Text(
                 "登录",
@@ -106,5 +97,15 @@ class LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  /// 登录操作
+  _loginDo() async {
+    if (await userLogin(_phone, _password) != null) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          new XRoute(builder: (context) => MyPage()),
+          (router) => router == null);
+    }
   }
 }

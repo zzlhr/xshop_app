@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xshop_app/pages/home.dart';
 import 'conf/theme.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

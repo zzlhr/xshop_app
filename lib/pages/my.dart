@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:xshop_app/component/toast.dart';
 import 'package:xshop_app/component/x_shop_bottom_navigation.dart';
 import 'package:xshop_app/conf/theme.dart';
 import 'package:xshop_app/pages/address.dart';
@@ -22,41 +22,30 @@ class MyPage extends StatefulWidget {
 }
 
 class MyPageState extends State<MyPage> {
-  Future<Map<String, dynamic>> _getUser() {
-    Future<Map<String, dynamic>> future = getUser();
-    return future;
-  }
-
-  var user;
+  var userMap;
   var loading = false;
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
-    _getUser().then((userMap) {
-      if (userMap.toString() == "{}") {
-        print("context:$context");
-        // 未登录提示登录
-        Fluttertoast.showToast(
-            msg: "请先登录",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIos: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      } else {
+    setState(() {
+      loading = false;
+    });
+    getUser().then((_userMap) {
+      print("userMap is null: ${_userMap.toString() != "{}"}");
+      if (_userMap != null && _userMap.toString() != "{}") {
         setState(() {
+          userMap = _userMap;
           loading = true;
-          this.user = userMap;
         });
       }
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("loading: $loading");
+    print("userMap:$userMap");
     return Scaffold(
       appBar: AppBar(
         title: Text("我的"),
@@ -78,6 +67,7 @@ class MyPageState extends State<MyPage> {
     );
   }
 
+  /// 未登录显示内容
   _noLoginBuild() {
     return Center(
       child: Column(
@@ -113,7 +103,7 @@ class MyPageState extends State<MyPage> {
     );
   }
 
-  /// main
+  /// main 登录显示的内容
   _build(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +195,7 @@ class MyPageState extends State<MyPage> {
                     Navigator.push(
                       context,
                       new MaterialPageRoute(
-                          builder: (context) => OrderListPage()),
+                          builder: (context) => OrderListPage(type: 0,)),
                     );
                   },
                   child: Text(
@@ -275,7 +265,7 @@ class MyPageState extends State<MyPage> {
   }
 
   _my(context) {
-    print("user:$user");
+    print("user:$userMap");
     return Container(
       padding: EdgeInsets.all(8),
       color: Colors.white,
@@ -293,11 +283,11 @@ class MyPageState extends State<MyPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    user['username'],
+                    userMap['username'],
                     style: h1,
                   ),
                   Text(
-                    user['phone'],
+                    userMap['phone'],
                     style: TextStyle(color: Colors.black45),
                   )
                 ],

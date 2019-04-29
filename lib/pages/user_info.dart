@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xshop_app/api/api.dart';
 import 'package:xshop_app/component/cell.dart';
 
 class UserInfoPage extends StatefulWidget {
@@ -12,6 +13,23 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class UserInfoPageState extends State<UserInfoPage> {
+
+  var userMap;
+  var loading = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userInfo().then((_userMap){
+      setState(() {
+        userMap = _userMap;
+        print(userMap);
+        loading = true;
+      });
+    });
+
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

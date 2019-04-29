@@ -10,10 +10,16 @@ Future<Map<String, dynamic>> getUser() async {
   }
 
   Map<String, dynamic> _userMap = json.decode(userStr);
-  // 是否登录，未登录跳转login
+  // 是否登录
   if (_userMap != null) {
     return _userMap;
   } else {
     return {};
   }
+}
+
+getToken() async {
+  Map<String, dynamic> userMap = await getUser();
+  print("userMap:$userMap");
+  return userMap['token'];
 }
