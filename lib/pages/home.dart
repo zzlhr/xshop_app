@@ -128,7 +128,10 @@ class HomePageState extends State<HomePage> {
           children: <Widget>[
             Container(
               alignment: Alignment.center,
-              child: Image.asset("images/d1.jpg",height: 150,),
+              child: Image.asset(
+                "images/d1.jpg",
+                height: 150,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),

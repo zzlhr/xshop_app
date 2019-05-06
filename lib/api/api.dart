@@ -12,7 +12,8 @@ String userModelUri = baseUrl + "/user/";
 
 // api List
 String userLoginApi = userModelUri + "login";
-String userInfoApi = userModelUri + "getUser";
+String userInfoApi = userModelUri + "userInfo";
+String updatePasswordApi = userModelUri + "upPassword";
 
 Options publicOptions = Options(
     contentType: ContentType.parse("application/x-www-form-urlencoded"));
@@ -29,8 +30,10 @@ checkErr(Response response) {
 
 // send http
 userLogin(String phone, String password) async {
-  Response response = await dio.post(userLoginApi,
-      data: {"phone": phone, "password": password}, options: publicOptions);
+  var postData = {"phoneNumber": phone, "password": password};
+  print(postData);
+  Response response =
+      await dio.post(userLoginApi, data: postData, options: publicOptions);
   if (checkErr(response)) {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("token", response.data['data']['token']);
@@ -40,7 +43,23 @@ userLogin(String phone, String password) async {
   return null;
 }
 
+/// 用户详情
 Future<Map<String, dynamic>> userInfo() async {
+  Map<String, dynamic> userMap = await getUser();
+  if (userMap == null) {
+    throw new Exception("未登录");
+  }
+  var postData = {'token': await getToken()};
+  Response response =
+      await dio.post(userInfoApi, data: postData, options: publicOptions);
+  if (response.data['code'] != 0) {
+    Toast.show(response.data['msg']);
+  }
+  return response.data['data'];
+}
+
+/// 修改密码
+Future<Map<String, dynamic>> updatePassword() async {
   Map<String, dynamic> userMap = await getUser();
   if (userMap == null) {
     throw new Exception("未登录");
@@ -48,7 +67,7 @@ Future<Map<String, dynamic>> userInfo() async {
   int uid = userMap['uid'];
   var postData = {'token': await getToken(), 'uid': uid};
   Response response =
-      await dio.post(userInfoApi, data: postData, options: publicOptions);
+      await dio.post(updatePasswordApi, data: postData, options: publicOptions);
   if (response.data['code'] != 0) {
     Toast.show(response.data['msg']);
   }

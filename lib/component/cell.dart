@@ -38,14 +38,12 @@ class Cell extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(
-                flex: 10,
                 child: Text(
                   this.title,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               ),
               Expanded(
-                flex: 20,
                 child: _getContent(),
               ),
               _jump()
@@ -63,7 +61,10 @@ class Cell extends StatelessWidget {
     var _type = type ?? "text";
     if (_type == "text") {
       var _content = content ?? "";
-      return Text(_content, textDirection: TextDirection.rtl);
+      return Container(
+        alignment: Alignment.centerRight,
+        child: Text(_content),
+      );
     }
     if (type == "AssetImage") {
       return Container(
@@ -81,12 +82,14 @@ class Cell extends StatelessWidget {
   _jump() {
     if (this.isJump ?? false) {
       return Expanded(
-        flex: 1,
-        child: Icon(
-          Icons.chevron_left,
-          textDirection: TextDirection.rtl,
-        ),
-      );
+          flex: 1,
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: Icon(
+              Icons.chevron_left,
+              textDirection: TextDirection.rtl,
+            ),
+          ));
     }
     return Container(width: 0, height: 0);
   }

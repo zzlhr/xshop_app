@@ -1,7 +1,11 @@
 # xshop_app
 ######  一款简洁flutter商城app
 
+### 后台地址: https://github.com/zzlhr/xshop
 
+
+
+欢迎star
 
 
 
