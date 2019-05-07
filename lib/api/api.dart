@@ -9,11 +9,13 @@ String baseUrl = "http://192.168.31.8:8008";
 
 // models uri
 String userModelUri = baseUrl + "/user/";
-
+String addressModeUri = baseUrl + "/address/";
 // api List
 String userLoginApi = userModelUri + "login";
 String userInfoApi = userModelUri + "userInfo";
 String updatePasswordApi = userModelUri + "updatePassword";
+String getAddressApi = addressModeUri + "getAddress";
+
 
 Options publicOptions = Options(
     contentType: ContentType.parse("application/x-www-form-urlencoded"));
@@ -65,7 +67,6 @@ Future<Map<String, dynamic>> updatePassword(
   if (userMap == null) {
     throw new Exception("未登录");
   }
-  int uid = userMap['uid'];
   var postData = {
     'token': await getToken(),
     'oldPassword': oldPassword,
@@ -73,6 +74,24 @@ Future<Map<String, dynamic>> updatePassword(
   };
   Response response =
       await dio.post(updatePasswordApi, data: postData, options: publicOptions);
+  if (response.data['code'] != 0) {
+    Toast.show(response.data['msg']);
+  }
+  return response.data['data'];
+}
+
+/// 获取收货地址
+Future<Map<String, dynamic>> getAddress(int page) async {
+  int pageSize = 10;
+  String token = await getToken();
+  print(token);
+  var postData = {
+    'token': token,
+    'page': page,
+    "pageSize": pageSize
+  };
+  Response response =
+      await dio.post(getAddressApi, data: postData, options: publicOptions);
   if (response.data['code'] != 0) {
     Toast.show(response.data['msg']);
   }
