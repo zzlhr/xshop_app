@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:xshop_app/api/api.dart';
 import 'package:xshop_app/component/toast.dart';
 import 'package:xshop_app/conf/theme.dart';
 
@@ -82,7 +84,9 @@ class EditPasswordPageState extends State<EditPasswordPage> {
           ),
           RaisedButton(
             color: themeColor,
-            onPressed: () {},
+            onPressed: () async {
+              _submit();
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -98,9 +102,17 @@ class EditPasswordPageState extends State<EditPasswordPage> {
     );
   }
 
-  _submit() {
+  _submit() async {
     if (_newPassword == "" || _oldPassword == "") {
       Toast.show("请输入密码！");
+      return;
+    }
+    Map<String, dynamic> respDate =
+        await updatePassword(_oldPassword, _newPassword);
+    print("修改密码:$respDate");
+    if (respDate != null) {
+      Toast.show("修改密码成功",
+          backgroundColor: Colors.grey, textColor: Colors.black);
     }
   }
 }

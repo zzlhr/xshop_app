@@ -13,7 +13,7 @@ String userModelUri = baseUrl + "/user/";
 // api List
 String userLoginApi = userModelUri + "login";
 String userInfoApi = userModelUri + "userInfo";
-String updatePasswordApi = userModelUri + "upPassword";
+String updatePasswordApi = userModelUri + "updatePassword";
 
 Options publicOptions = Options(
     contentType: ContentType.parse("application/x-www-form-urlencoded"));
@@ -59,13 +59,18 @@ Future<Map<String, dynamic>> userInfo() async {
 }
 
 /// 修改密码
-Future<Map<String, dynamic>> updatePassword() async {
+Future<Map<String, dynamic>> updatePassword(
+    String oldPassword, String newPassword) async {
   Map<String, dynamic> userMap = await getUser();
   if (userMap == null) {
     throw new Exception("未登录");
   }
   int uid = userMap['uid'];
-  var postData = {'token': await getToken(), 'uid': uid};
+  var postData = {
+    'token': await getToken(),
+    'oldPassword': oldPassword,
+    "newPassword": newPassword
+  };
   Response response =
       await dio.post(updatePasswordApi, data: postData, options: publicOptions);
   if (response.data['code'] != 0) {
