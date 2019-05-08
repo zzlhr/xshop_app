@@ -30,6 +30,7 @@ class EditAddressPageState extends State<EditAddressPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(10.0),
                   hintText: '请输入收货人名称',
+                  icon: Icon(Icons.person)
                 ),
               ),
             ),
@@ -39,6 +40,7 @@ class EditAddressPageState extends State<EditAddressPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(10.0),
                   hintText: '请输入收货人联系方式',
+                  icon: Icon(Icons.phone)
                 ),
               ),
             ),
@@ -71,6 +73,7 @@ class EditAddressPageState extends State<EditAddressPage> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10.0),
                     hintText: '详细地址',
+                    icon: Icon(Icons.home)
                   ),
                 ))
           ],
