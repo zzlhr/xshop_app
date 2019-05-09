@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xshop_app/api/api.dart';
 import 'package:xshop_app/pages/edit_address.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AddressPage extends StatefulWidget {
   AddressPage({Key key, this.title}) : super(key: key);
@@ -16,22 +17,15 @@ class AddressPageState extends State<AddressPage> {
   int page = 1;
   bool loadOk = false;
   bool isLoading = false;
-  Map<String, dynamic> addressDate = {}; // 获取的数据
-  /// 从[addressDate] 中获取的arr
+  Map<String, dynamic> pageDate = {}; // 获取的数据
   List<Map<String, dynamic>> addressList = [];
-  ScrollController _scrollController = ScrollController();
+  RefreshController _refreshController;
 
   @override
   void initState() {
     super.initState();
+    _refreshController = RefreshController();
     _loadData();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        print("到底了");
-        _loadData();
-      }
-    });
   }
 
   _deleteAddress() {
@@ -68,31 +62,55 @@ class AddressPageState extends State<AddressPage> {
   }
 
   _loadData() async {
-
     if (!isLoading) {
       setState(() {
         isLoading = true;
       });
-      Map<String, dynamic> _addressDate = await getAddress(page);
+      Map<String, dynamic> _addressDate = await getAddress(page, pageSize: 20);
       setState(() {
         loadOk = true;
-        addressDate = _addressDate;
-        for (var item in addressDate['arr']) {
+        var result = _addressDate;
+        for (var item in result['arr']) {
           addressList.add(item);
         }
+        result.remove("arr");
+        pageDate = result;
         page++;
         isLoading = false;
       });
-    }
-    if(page >= addressDate['totalPage']){
-      return _getMoreWidget();
     }
   }
 
   @override
   void dispose() {
     super.dispose();
-    _scrollController.dispose();
+    _refreshController.dispose();
+  }
+
+  void _onRefresh() {
+    print("page: $page, totalPage: ${pageDate['totalPage']}");
+    setState(() {
+      page = 1;
+      addressList = [];
+    });
+    try {
+      _loadData();
+      _refreshController.refreshCompleted();
+    } catch (e) {
+      _refreshController.refreshFailed();
+    }
+    /*.  after the data return,
+        use _refreshController.refreshComplete() or refreshFailed() to end refreshing
+   */
+  }
+
+  void _onLoading() {
+    if (page > pageDate['totalPage']) {
+      _refreshController.loadNoData();
+      return;
+    }
+    _loadData();
+    _refreshController.loadComplete();
   }
 
   Widget _addressItemCard(address) {
@@ -155,21 +173,17 @@ class AddressPageState extends State<AddressPage> {
       _list.add(_addressItemCard(address));
     }
 
-    return RefreshIndicator(
+    return SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: true,
+      header: WaterDropHeader(),
+      controller: _refreshController,
       onRefresh: _onRefresh,
+      onLoading: _onLoading,
       child: ListView(
         children: _list,
-        controller: _scrollController,
       ),
     );
-  }
-
-  Future _onRefresh() async {
-    setState(() {
-      page = 1;
-      addressList = [];
-    });
-    await _loadData();
   }
 
   Widget _getMoreWidget() {

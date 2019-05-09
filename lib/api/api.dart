@@ -81,14 +81,13 @@ Future<Map<String, dynamic>> updatePassword(
 }
 
 /// 获取收货地址
-Future<Map<String, dynamic>> getAddress(int page) async {
-  int pageSize = 10;
+Future<Map<String, dynamic>> getAddress(int page, {int pageSize}) async {
   String token = await getToken();
   print(token);
   var postData = {
     'token': token,
     'page': page,
-    "pageSize": pageSize
+    "pageSize": pageSize == null ? 0 : pageSize
   };
   Response response =
       await dio.post(getAddressApi, data: postData, options: publicOptions);
