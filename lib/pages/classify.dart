@@ -116,6 +116,7 @@ class ClassifyPagePageState extends State<ClassifyPage> {
                       ),
                       Expanded(
                         child: Text(i['name']),
+                        flex: 2,
                       )
                     ],
                   ),
@@ -142,10 +143,11 @@ class ClassifyPagePageState extends State<ClassifyPage> {
           shrinkWrap: true,
           slivers: <Widget>[
             SliverPadding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(16.0),
               sliver: SliverGrid.count(
-                crossAxisSpacing: 10.0,
+                crossAxisSpacing: 12.0,
                 crossAxisCount: 3,
+                childAspectRatio: 0.8,
                 children: _content,
               ),
             ),
