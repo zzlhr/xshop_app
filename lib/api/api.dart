@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_app/component/toast.dart';
 import 'package:xshop_app/util/user_util.dart';
 
-String baseUrl = "http://192.168.31.8:8008";
+String baseUrl = "http://192.168.31.9:8008";
 
 // models uri
 String userModelUri = baseUrl + "/user/";
@@ -15,7 +15,6 @@ String userLoginApi = userModelUri + "login";
 String userInfoApi = userModelUri + "userInfo";
 String updatePasswordApi = userModelUri + "updatePassword";
 String getAddressApi = addressModeUri + "getAddress";
-
 
 Options publicOptions = Options(
     contentType: ContentType.parse("application/x-www-form-urlencoded"));

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xshop_app/component/toast.dart';
 import 'package:xshop_app/component/x_shop_bottom_navigation.dart';
 import 'package:xshop_app/conf/theme.dart';
 import 'package:xshop_app/pages/address.dart';
@@ -31,7 +30,6 @@ class MyPageState extends State<MyPage> {
       loading = false;
     });
     getUser().then((_userMap) {
-      print("userMap is null: ${_userMap.toString() != "{}"}");
       if (_userMap != null && _userMap.toString() != "{}") {
         setState(() {
           userMap = _userMap;
